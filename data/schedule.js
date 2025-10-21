@@ -9,7 +9,7 @@ export const collectionAreas = {
 
 export const weekdayNames = ['日', '月', '火', '水', '木', '金', '土'];
 
-const CSV_PATH = '/data/schedule.csv';
+const CSV_PATH = 'data/schedule.csv';
 
 function parseCsv(text) {
   const normalized = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/^\ufeff/, '');
