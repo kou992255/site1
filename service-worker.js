@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yabunishi-gomi-cache-v2';
+const CACHE_NAME = 'yabunishi-gomi-cache-v3';
 const OFFLINE_ASSETS = [
   '/',
   '/index.html',
@@ -7,9 +7,7 @@ const OFFLINE_ASSETS = [
   '/scripts/sw-register.js',
   '/data/schedule.js',
   '/data/schedule.csv',
-  '/manifest.webmanifest',
-  '/icons/icon-192.svg',
-  '/icons/icon-512.svg',
+  '/manifest.json',
   '/assets/yabunishi-gomicalendar.pdf',
 ];
 
