@@ -1,0 +1,280 @@
+:root {
+  color-scheme: light dark;
+  --primary: #1976d2;
+  --primary-dark: #115293;
+  --background: #f5f7fb;
+  --surface: #ffffff;
+  --text: #1f2933;
+  --text-muted: #4b5563;
+  --accent: #ff7043;
+  font-family: 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.app-header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  padding: 2.5rem 1.5rem 2rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-header h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.8rem, 2.3vw + 1rem, 2.6rem);
+}
+
+.app-tagline {
+  margin: 0 auto 1.25rem;
+  max-width: 45rem;
+  font-size: 1rem;
+}
+
+.pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease-in-out;
+}
+
+.pdf-link::before {
+  content: '\1F4C4';
+  font-size: 1.2rem;
+}
+
+.pdf-link:hover,
+.pdf-link:focus {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+main {
+  padding: clamp(1.5rem, 2vw, 2.5rem) clamp(1rem, 5vw, 4rem);
+  display: grid;
+  gap: 2.5rem;
+}
+
+.calendar-section,
+.upcoming-section,
+.tips-section {
+  background: var(--surface);
+  border-radius: 1.25rem;
+  box-shadow: 0 12px 40px rgba(25, 118, 210, 0.12);
+  padding: clamp(1.25rem, 2vw, 2rem);
+}
+
+.calendar-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-controls button {
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.calendar-controls button:hover,
+.calendar-controls button:focus {
+  transform: scale(1.05);
+  background: var(--primary-dark);
+}
+
+.calendar-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.legend {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.legend-area {
+  margin: 0 0 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.legend-source-link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.legend-source-link:hover,
+.legend-source-link:focus {
+  text-decoration: underline;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-swatch {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 0.3rem;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.calendar-header,
+.calendar-cell {
+  padding: 0.75rem;
+  border-radius: 0.85rem;
+  min-height: 6rem;
+  background: rgba(25, 118, 210, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.calendar-header {
+  background: transparent;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+  min-height: unset;
+  padding: 0.25rem;
+}
+
+.calendar-cell.outside-month {
+  opacity: 0.35;
+}
+
+.calendar-cell.today {
+  border: 2px solid var(--accent);
+}
+
+.calendar-cell .date-label {
+  font-weight: 700;
+}
+
+.event-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: #fff;
+  font-weight: 600;
+}
+
+.upcoming-section h2,
+.tips-section h2 {
+  margin-top: 0;
+}
+
+.upcoming-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.upcoming-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  background: rgba(25, 118, 210, 0.08);
+}
+
+.upcoming-descriptions {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.upcoming-date {
+  font-weight: 700;
+}
+
+.upcoming-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tips-section ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  color: var(--text-muted);
+}
+
+@media (min-width: 960px) {
+  main {
+    grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr);
+  }
+
+  .calendar-section {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    --surface: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --primary: #64b5f6;
+    --primary-dark: #2196f3;
+    --accent: #ffa726;
+  }
+
+  .calendar-cell {
+    background: rgba(100, 181, 246, 0.08);
+  }
+
+  .upcoming-list li {
+    background: rgba(100, 181, 246, 0.1);
+  }
+}

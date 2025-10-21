@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>養父西町ごみ出しスケジュール</title>
+    <meta
+      name="description"
+      content="枚方市養父西町のごみ出しスケジュールを確認できるPWA対応ウェブアプリ"
+    />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#1976d2" />
+    <link rel="icon" href="icons/icon-192.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/icon-192.svg" />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>養父西町 ごみ出しスケジュール</h1>
+      <p class="app-tagline">
+        枚方市養父西町エリアの収集日をいつでも確認。ホーム画面に追加してオフラインでも利用できます。
+      </p>
+      <a class="pdf-link" id="pdf-link" href="#" target="_blank" rel="noopener">
+        公式PDFを開く
+      </a>
+    </header>
+
+    <main>
+      <section class="calendar-section">
+        <div class="calendar-controls">
+          <button id="prev-month" aria-label="前の月">◀</button>
+          <div id="current-month" class="calendar-title"></div>
+          <button id="next-month" aria-label="次の月">▶</button>
+        </div>
+        <div class="legend" id="legend"></div>
+        <div class="calendar" id="calendar" role="grid" aria-describedby="legend"></div>
+      </section>
+
+      <section class="upcoming-section">
+        <h2>次の収集日</h2>
+        <ul id="upcoming-list" class="upcoming-list" aria-live="polite"></ul>
+      </section>
+
+      <section class="tips-section">
+        <h2>出し方のポイント</h2>
+        <ul>
+          <li>収集日の前夜8時から当日朝8時までに、指定場所へ出してください。</li>
+          <li>大きなごみ・粗大ごみは事前申込みが必要です。</li>
+          <li>台風や荒天時は市の公式発表を確認し、安全を最優先に行動してください。</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>&copy; 2025 養父西町ごみ出しカレンダー</p>
+    </footer>
+
+    <script type="module" src="scripts/app.js"></script>
+    <script src="scripts/sw-register.js" defer></script>
+  </body>
+</html>
