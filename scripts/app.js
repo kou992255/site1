@@ -1,5 +1,5 @@
 import {
-  scheduleRules,
+  loadScheduleRules,
   officialPdfUrl,
   sourceReference,
   collectionAreas,
@@ -24,6 +24,10 @@ if (pdfLinkElement) {
 const today = new Date();
 let activeYear = today.getFullYear();
 let activeMonth = today.getMonth();
+let scheduleRules = [];
+
+prevMonthButton.disabled = true;
+nextMonthButton.disabled = true;
 
 function formatDateKey(date) {
   return date.toISOString().split('T')[0];
@@ -227,7 +231,54 @@ function renderUpcoming() {
   });
 }
 
+function showLoadingState() {
+  legendElement.innerHTML = '';
+  const legendMessage = document.createElement('p');
+  legendMessage.className = 'status-message';
+  legendMessage.textContent = 'ごみ出し情報を読み込み中です…';
+  legendElement.appendChild(legendMessage);
+
+  calendarElement.innerHTML = '';
+  const calendarMessage = document.createElement('p');
+  calendarMessage.className = 'status-message';
+  calendarMessage.textContent = 'カレンダーを読み込み中…';
+  calendarElement.appendChild(calendarMessage);
+
+  upcomingListElement.innerHTML = '';
+  const upcomingMessage = document.createElement('li');
+  upcomingMessage.className = 'status-message';
+  upcomingMessage.textContent = '収集予定を読み込み中です…';
+  upcomingListElement.appendChild(upcomingMessage);
+}
+
+function showScheduleLoadError(message) {
+  const errorText =
+    message ?? 'ごみ出し情報を読み込めませんでした。時間を置いて再度お試しください。';
+
+  legendElement.innerHTML = '';
+  const legendError = document.createElement('p');
+  legendError.className = 'status-message error';
+  legendError.textContent = errorText;
+  legendElement.appendChild(legendError);
+
+  calendarElement.innerHTML = '';
+  const calendarError = document.createElement('p');
+  calendarError.className = 'status-message error';
+  calendarError.textContent = 'カレンダーを表示できません。';
+  calendarElement.appendChild(calendarError);
+
+  upcomingListElement.innerHTML = '';
+  const upcomingError = document.createElement('li');
+  upcomingError.className = 'status-message error';
+  upcomingError.textContent = '収集予定を取得できませんでした。';
+  upcomingListElement.appendChild(upcomingError);
+}
+
 prevMonthButton.addEventListener('click', () => {
+  if (scheduleRules.length === 0) {
+    return;
+  }
+
   if (activeMonth === 0) {
     activeMonth = 11;
     activeYear -= 1;
@@ -238,6 +289,10 @@ prevMonthButton.addEventListener('click', () => {
 });
 
 nextMonthButton.addEventListener('click', () => {
+  if (scheduleRules.length === 0) {
+    return;
+  }
+
   if (activeMonth === 11) {
     activeMonth = 0;
     activeYear += 1;
@@ -247,6 +302,27 @@ nextMonthButton.addEventListener('click', () => {
   renderCalendar(activeYear, activeMonth);
 });
 
-renderLegend();
-renderCalendar(activeYear, activeMonth);
-renderUpcoming();
+async function init() {
+  showLoadingState();
+
+  try {
+    scheduleRules = await loadScheduleRules();
+
+    if (scheduleRules.length === 0) {
+      showScheduleLoadError('CSVにごみ出し情報が含まれていません。');
+      return;
+    }
+
+    prevMonthButton.disabled = false;
+    nextMonthButton.disabled = false;
+
+    renderLegend();
+    renderCalendar(activeYear, activeMonth);
+    renderUpcoming();
+  } catch (error) {
+    console.error('Failed to load schedule rules from CSV.', error);
+    showScheduleLoadError();
+  }
+}
+
+init();
