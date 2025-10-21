@@ -103,6 +103,12 @@ main {
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
+.calendar-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .calendar-controls button:hover,
 .calendar-controls button:focus {
   transform: scale(1.05);
@@ -141,6 +147,25 @@ main {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.status-message {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 0.85rem;
+  background: rgba(25, 118, 210, 0.08);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.status-message.error {
+  background: rgba(211, 47, 47, 0.12);
+  color: #d32f2f;
+}
+
+.calendar .status-message {
+  grid-column: 1 / -1;
+  text-align: center;
 }
 
 .legend-swatch {
@@ -212,6 +237,11 @@ main {
   gap: 0.75rem;
 }
 
+.upcoming-list .status-message {
+  display: block;
+  text-align: center;
+}
+
 .upcoming-list li {
   display: flex;
   flex-direction: column;
@@ -276,5 +306,14 @@ main {
 
   .upcoming-list li {
     background: rgba(100, 181, 246, 0.1);
+  }
+
+  .status-message {
+    background: rgba(100, 181, 246, 0.12);
+  }
+
+  .status-message.error {
+    background: rgba(239, 83, 80, 0.25);
+    color: #ff8a80;
   }
 }
