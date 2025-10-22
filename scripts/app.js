@@ -575,6 +575,137 @@ const NotificationManager = (() => {
 
 NotificationManager.init();
 
+function initPullToRefresh() {
+  const { body } = document;
+  const touchSupported = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  if (!body || !touchSupported) {
+    return;
+  }
+
+  const indicator = document.createElement('div');
+  indicator.className = 'pull-to-refresh';
+  indicator.setAttribute('role', 'status');
+  indicator.setAttribute('aria-live', 'polite');
+  const label = document.createElement('span');
+  label.className = 'pull-to-refresh__label';
+  label.textContent = '下に引っ張って更新';
+  indicator.appendChild(label);
+  body.prepend(indicator);
+
+  const threshold = 70;
+  let startY = 0;
+  let pulling = false;
+  let ready = false;
+
+  const hideIndicator = () => {
+    indicator.classList.remove('visible', 'ready', 'refreshing');
+    indicator.style.transition = '';
+    indicator.style.transform = '';
+    indicator.style.opacity = '';
+  };
+
+  const finishPull = () => {
+    if (!pulling) {
+      return;
+    }
+
+    indicator.style.transition = '';
+
+    if (ready) {
+      indicator.classList.add('visible', 'refreshing');
+      indicator.classList.remove('ready');
+      indicator.style.transform = '';
+      indicator.style.opacity = '';
+      label.textContent = '更新しています…';
+
+      window.setTimeout(() => {
+        window.location.reload();
+      }, 150);
+    } else {
+      hideIndicator();
+    }
+
+    pulling = false;
+    ready = false;
+  };
+
+  const isAtTop = () => {
+    const scrollingElement = document.scrollingElement || document.documentElement;
+    const scrollTop = window.scrollY || scrollingElement.scrollTop || 0;
+    return scrollTop <= 0;
+  };
+
+  window.addEventListener(
+    'touchstart',
+    (event) => {
+      if (event.touches.length !== 1) {
+        pulling = false;
+        return;
+      }
+
+      if (!isAtTop()) {
+        pulling = false;
+        return;
+      }
+
+      startY = event.touches[0].clientY;
+      pulling = true;
+      ready = false;
+      indicator.classList.add('visible');
+      indicator.classList.remove('ready', 'refreshing');
+      indicator.style.transition = 'none';
+      indicator.style.transform = 'translateY(-100%)';
+      indicator.style.opacity = '0';
+      label.textContent = '下に引っ張って更新';
+    },
+    { passive: true },
+  );
+
+  window.addEventListener(
+    'touchmove',
+    (event) => {
+      if (!pulling) {
+        return;
+      }
+
+      const currentY = event.touches[0].clientY;
+      const diff = currentY - startY;
+
+      if (diff <= 0) {
+        hideIndicator();
+        pulling = false;
+        ready = false;
+        return;
+      }
+
+      const progress = Math.min(diff / threshold, 1);
+      indicator.style.transform = `translateY(${progress * 100 - 100}%)`;
+      indicator.style.opacity = `${Math.min(progress * 1.2, 1)}`;
+
+      if (diff > threshold) {
+        if (!ready) {
+          indicator.classList.add('ready');
+          label.textContent = '離すと更新';
+          ready = true;
+        }
+      } else if (ready) {
+        indicator.classList.remove('ready');
+        label.textContent = '下に引っ張って更新';
+        ready = false;
+      }
+
+      event.preventDefault();
+    },
+    { passive: false },
+  );
+
+  window.addEventListener('touchend', finishPull, { passive: true });
+  window.addEventListener('touchcancel', finishPull, { passive: true });
+}
+
+initPullToRefresh();
+
 function buildScheduleMap(year, month) {
   const start = new Date(year, month, 1);
   const startOffset = start.getDay();
