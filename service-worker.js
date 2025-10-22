@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yabunishi-gomi-cache-v5';
+const CACHE_NAME = 'yabunishi-gomi-cache-v6';
 const ASSET_BASE = self.location.href.replace(/service-worker\.js$/, '');
 const RELATIVE_ASSETS = [
   './',
@@ -56,6 +56,27 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => caches.match(FALLBACK_PAGE));
+    }),
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      for (const client of clientList) {
+        if ('focus' in client) {
+          client.focus();
+          return undefined;
+        }
+      }
+
+      if (self.clients.openWindow) {
+        return self.clients.openWindow('./');
+      }
+
+      return undefined;
     }),
   );
 });
