@@ -31,6 +31,41 @@
         <ul id="upcoming-list" class="upcoming-list" aria-live="polite"></ul>
       </section>
 
+      <section class="notifications-section" id="notification-settings">
+        <h2>通知設定</h2>
+        <p id="notification-support-message" class="notification-message">
+          前日の夜にリマインドを受け取るには通知をオンにしてください。
+        </p>
+        <div id="notification-controls" class="notification-controls">
+          <label class="notification-toggle">
+            <input type="checkbox" id="default-alert-toggle" />
+            <span>デフォルト通知（前日の20時に翌日のごみの種類をお知らせ）</span>
+          </label>
+
+          <details class="notification-accordion">
+            <summary>カスタム通知を追加する</summary>
+            <form id="custom-alert-form" class="notification-form">
+              <label class="notification-form-field">
+                <span>通知時間（前日）</span>
+                <input type="time" id="custom-alert-time" value="20:00" required />
+              </label>
+              <fieldset class="notification-form-field">
+                <legend>お知らせしたいごみの種類</legend>
+                <div id="custom-alert-categories" class="notification-category-list">
+                  <p class="notification-category-placeholder">ごみの種類を読み込み中です…</p>
+                </div>
+              </fieldset>
+              <button type="submit" class="notification-submit">通知を追加</button>
+            </form>
+          </details>
+
+          <div>
+            <h3 class="notification-subtitle">カスタム通知一覧</h3>
+            <ul id="custom-alert-list" class="notification-list"></ul>
+          </div>
+        </div>
+      </section>
+
       <section class="calendar-section">
         <div class="calendar-controls">
           <button id="prev-month" aria-label="前の月">◀</button>
