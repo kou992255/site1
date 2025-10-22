@@ -1,7 +1,8 @@
 {
   "name": "YabuNishi Waste Schedule",
   "short_name": "Waste Schedule",
-  "start_url": ".",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#7bb6e6",
   "theme_color": "#7bb6e6",
@@ -9,13 +10,13 @@
   "description": "枚方市養父西町エリアのごみ収集日を確認できるPWAアプリ",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

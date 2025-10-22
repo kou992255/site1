@@ -1,15 +1,20 @@
-const CACHE_NAME = 'yabunishi-gomi-cache-v4';
-const OFFLINE_ASSETS = [
-  '/',
-  '/index.html',
-  '/styles/main.css',
-  '/scripts/app.js',
-  '/scripts/sw-register.js',
-  '/data/schedule.js',
-  '/data/schedule.csv',
-  '/manifest.json',
-  '/assets/yabunishi-gomicalendar.pdf',
+const CACHE_NAME = 'yabunishi-gomi-cache-v5';
+const ASSET_BASE = self.location.href.replace(/service-worker\.js$/, '');
+const RELATIVE_ASSETS = [
+  './',
+  './index.html',
+  './styles/main.css',
+  './scripts/app.js',
+  './scripts/sw-register.js',
+  './data/schedule.js',
+  './data/schedule.csv',
+  './manifest.json',
+  './assets/yabunishi-gomicalendar.pdf',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
 ];
+const OFFLINE_ASSETS = RELATIVE_ASSETS.map((path) => new URL(path, ASSET_BASE).toString());
+const FALLBACK_PAGE = new URL('./index.html', ASSET_BASE).toString();
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -50,7 +55,7 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(request, cloned));
           return response;
         })
-        .catch(() => caches.match('/index.html'));
+        .catch(() => caches.match(FALLBACK_PAGE));
     }),
   );
 });
