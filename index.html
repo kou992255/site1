@@ -31,6 +31,25 @@
         <ul id="upcoming-list" class="upcoming-list" aria-live="polite"></ul>
       </section>
 
+      <section class="calendar-section">
+        <div class="calendar-controls">
+          <button id="prev-month" aria-label="前の月">◀</button>
+          <div id="current-month" class="calendar-title"></div>
+          <button id="next-month" aria-label="次の月">▶</button>
+        </div>
+        <div class="calendar" id="calendar" role="grid" aria-describedby="legend"></div>
+        <div class="legend" id="legend"></div>
+      </section>
+
+      <section class="tips-section">
+        <h2>出し方のまとめ</h2>
+        <div class="tips-summary">
+          <p><strong>時間帯:</strong> 収集日の前夜20時～当日8時の間に指定場所へ出してください。</p>
+          <p><strong>粗大ごみ:</strong> 大きなものは必ず事前に申込み、案内に従ってください。</p>
+          <p><strong>荒天時:</strong> 台風などの場合は市の公式発表を確認し、安全を最優先に判断してください。</p>
+        </div>
+      </section>
+
       <section class="notifications-section" id="notification-settings">
         <h2>通知設定</h2>
         <p id="notification-support-message" class="notification-message">
@@ -63,25 +82,6 @@
             <h3 class="notification-subtitle">カスタム通知一覧</h3>
             <ul id="custom-alert-list" class="notification-list"></ul>
           </div>
-        </div>
-      </section>
-
-      <section class="calendar-section">
-        <div class="calendar-controls">
-          <button id="prev-month" aria-label="前の月">◀</button>
-          <div id="current-month" class="calendar-title"></div>
-          <button id="next-month" aria-label="次の月">▶</button>
-        </div>
-        <div class="calendar" id="calendar" role="grid" aria-describedby="legend"></div>
-        <div class="legend" id="legend"></div>
-      </section>
-
-      <section class="tips-section">
-        <h2>出し方のまとめ</h2>
-        <div class="tips-summary">
-          <p><strong>時間帯:</strong> 収集日の前夜20時～当日8時の間に指定場所へ出してください。</p>
-          <p><strong>粗大ごみ:</strong> 大きなものは必ず事前に申込み、案内に従ってください。</p>
-          <p><strong>荒天時:</strong> 台風などの場合は市の公式発表を確認し、安全を最優先に判断してください。</p>
         </div>
       </section>
     </main>

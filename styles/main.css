@@ -24,6 +24,42 @@ body {
   line-height: 1.6;
 }
 
+.pull-to-refresh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  z-index: 20;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.pull-to-refresh.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.pull-to-refresh.ready {
+  background: var(--primary-dark);
+}
+
+.pull-to-refresh.refreshing {
+  transition: none;
+  transform: translateY(0);
+  opacity: 1;
+}
+
 
 .app-header {
   background: linear-gradient(135deg, rgba(123, 182, 230, 0.95), rgba(90, 156, 214, 0.9));
@@ -534,6 +570,10 @@ main {
   }
 
   .calendar-section {
+    grid-column: 1 / -1;
+  }
+
+  .notifications-section {
     grid-column: 1 / -1;
   }
 }
