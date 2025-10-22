@@ -3,8 +3,8 @@
   "short_name": "Waste Schedule",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#1976d2",
-  "theme_color": "#1976d2",
+  "background_color": "#7bb6e6",
+  "theme_color": "#7bb6e6",
   "lang": "ja",
   "description": "枚方市養父西町エリアのごみ収集日を確認できるPWAアプリ",
   "icons": [
