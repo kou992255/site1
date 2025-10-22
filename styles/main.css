@@ -279,6 +279,70 @@ main {
   color: var(--text-muted);
 }
 
+@media (max-width: 720px) {
+  .app-header {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .app-tagline {
+    font-size: 0.95rem;
+  }
+
+  .pdf-link {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.95rem;
+  }
+
+  main {
+    padding: 1.25rem 1rem 2rem;
+    gap: 1.75rem;
+  }
+
+  .calendar-section,
+  .upcoming-section,
+  .tips-section {
+    padding: 1rem;
+  }
+
+  .calendar-controls {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .calendar-title {
+    font-size: 1.2rem;
+  }
+
+  .legend {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-controls button {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .calendar {
+    gap: 0.35rem;
+    font-size: 0.9rem;
+  }
+
+  .calendar-header,
+  .calendar-cell {
+    padding: 0.5rem;
+    min-height: 4.5rem;
+  }
+
+  .event-pill {
+    font-size: 0.7rem;
+  }
+
+  .upcoming-list li {
+    padding: 0.75rem 0.85rem;
+  }
+}
+
 @media (min-width: 960px) {
   main {
     grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr);
