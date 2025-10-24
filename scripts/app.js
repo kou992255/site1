@@ -743,24 +743,6 @@ function buildScheduleMap(year, month) {
 function renderLegend() {
   legendElement.innerHTML = '';
 
-  const areaDescription = document.createElement('p');
-  areaDescription.className = 'legend-area';
-  areaDescription.textContent = collectionAreas.note;
-
-  if (sourceReference) {
-    const br = document.createElement('br');
-    const link = document.createElement('a');
-    link.href = sourceReference;
-    link.target = '_blank';
-    link.rel = 'noopener';
-    link.textContent = '枚方市公式サイトで確認する';
-    link.className = 'legend-source-link';
-    areaDescription.appendChild(br);
-    areaDescription.appendChild(link);
-  }
-
-  legendElement.appendChild(areaDescription);
-
   scheduleRules.forEach((rule) => {
     const item = document.createElement('div');
     item.className = 'legend-item';
