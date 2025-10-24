@@ -70,6 +70,14 @@ body {
   z-index: 10;
 }
 
+.current-datetime {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
 .header-inner {
   display: flex;
   align-items: center;
@@ -84,30 +92,6 @@ body {
   font-weight: 700;
   flex: 1 1 auto;
   line-height: 1.2;
-}
-
-.pdf-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.5rem 1.1rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.24);
-  color: #fff;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.2s ease-in-out;
-  white-space: nowrap;
-}
-
-.pdf-link::before {
-  content: '\1F4C4';
-  font-size: 1.2rem;
-}
-
-.pdf-link:hover,
-.pdf-link:focus {
-  background: rgba(255, 255, 255, 0.32);
 }
 
 main {
@@ -498,12 +482,6 @@ main {
 
   .header-inner {
     gap: 0.75rem;
-  }
-
-  .pdf-link {
-    width: 100%;
-    justify-content: center;
-    font-size: 0.95rem;
   }
 
   main {

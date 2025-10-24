@@ -1,18 +1,17 @@
 import {
   loadScheduleRules,
-  officialPdfUrl,
   sourceReference,
   collectionAreas,
   weekdayNames,
 } from '../data/schedule.js';
 
+const currentDateTimeElement = document.getElementById('current-datetime');
 const calendarElement = document.getElementById('calendar');
 const legendElement = document.getElementById('legend');
 const monthLabelElement = document.getElementById('current-month');
 const prevMonthButton = document.getElementById('prev-month');
 const nextMonthButton = document.getElementById('next-month');
 const upcomingListElement = document.getElementById('upcoming-list');
-const pdfLinkElement = document.getElementById('pdf-link');
 const notificationSection = document.getElementById('notification-settings');
 const notificationSupportMessageElement = document.getElementById(
   'notification-support-message',
@@ -26,17 +25,33 @@ const customAlertCategoriesContainer = document.getElementById(
 );
 const customAlertListElement = document.getElementById('custom-alert-list');
 
-if (pdfLinkElement) {
-  pdfLinkElement.href = officialPdfUrl;
-  pdfLinkElement.setAttribute('download', 'yabunishi-garbage-schedule.pdf');
-  pdfLinkElement.title = `${collectionAreas.name}の公式ごみ収集カレンダー（PDF）`;
-  pdfLinkElement.rel = 'noopener';
-}
-
 const today = new Date();
 let activeYear = today.getFullYear();
 let activeMonth = today.getMonth();
 let scheduleRules = [];
+
+function pad2(value) {
+  return String(value).padStart(2, '0');
+}
+
+function updateCurrentDateTime() {
+  if (!currentDateTimeElement) {
+    return;
+  }
+
+  const now = new Date();
+  const formatted = `${now.getFullYear()}/${pad2(now.getMonth() + 1)}/${pad2(
+    now.getDate(),
+  )}/ ${pad2(now.getHours())}:${pad2(now.getMinutes())}:${pad2(now.getSeconds())} (${
+    weekdayNames[now.getDay()]
+  })`;
+  currentDateTimeElement.textContent = formatted;
+}
+
+if (currentDateTimeElement) {
+  updateCurrentDateTime();
+  setInterval(updateCurrentDateTime, 1000);
+}
 
 prevMonthButton.disabled = true;
 nextMonthButton.disabled = true;
