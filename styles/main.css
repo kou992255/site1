@@ -70,6 +70,14 @@ body {
   z-index: 10;
 }
 
+.current-datetime {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
 .header-inner {
   display: flex;
   align-items: center;
