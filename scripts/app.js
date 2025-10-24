@@ -1,6 +1,5 @@
 import {
   loadScheduleRules,
-  officialPdfUrl,
   sourceReference,
   collectionAreas,
   weekdayNames,
@@ -12,7 +11,6 @@ const monthLabelElement = document.getElementById('current-month');
 const prevMonthButton = document.getElementById('prev-month');
 const nextMonthButton = document.getElementById('next-month');
 const upcomingListElement = document.getElementById('upcoming-list');
-const pdfLinkElement = document.getElementById('pdf-link');
 const notificationSection = document.getElementById('notification-settings');
 const notificationSupportMessageElement = document.getElementById(
   'notification-support-message',
@@ -25,13 +23,6 @@ const customAlertCategoriesContainer = document.getElementById(
   'custom-alert-categories',
 );
 const customAlertListElement = document.getElementById('custom-alert-list');
-
-if (pdfLinkElement) {
-  pdfLinkElement.href = officialPdfUrl;
-  pdfLinkElement.setAttribute('download', 'yabunishi-garbage-schedule.pdf');
-  pdfLinkElement.title = `${collectionAreas.name}の公式ごみ収集カレンダー（PDF）`;
-  pdfLinkElement.rel = 'noopener';
-}
 
 const today = new Date();
 let activeYear = today.getFullYear();
