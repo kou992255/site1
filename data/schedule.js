@@ -1,4 +1,3 @@
-export const officialPdfUrl = '/assets/yabunishi-gomicalendar.pdf';
 export const sourceReference = 'https://www.city.hirakata.osaka.jp/';
 
 export const collectionAreas = {
